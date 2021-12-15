@@ -9,25 +9,24 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-public class User {
+public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Task> tasks;
-    private String userName;
-    private String password;
-    @Column(unique = true)
-    private String email;
-    private int phoneNumber;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+    private String taskTitle;
+
+    @Column(length = 3000)
+    private String taskDesc;
     @CreationTimestamp
     private Timestamp createdDated;
     @UpdateTimestamp

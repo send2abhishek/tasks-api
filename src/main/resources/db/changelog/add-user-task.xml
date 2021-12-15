@@ -5,7 +5,19 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd"
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
-    <changeSet id="1639579363774-1" author="abhishek160.kumar (generated)">
+    <changeSet id="1639581135159-1" author="abhishek160.kumar (generated)">
+        <createTable tableName="task">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_task"/>
+            </column>
+            <column name="user_id" type="BIGINT"/>
+            <column name="task_title" type="VARCHAR(255)"/>
+            <column name="task_desc" type="VARCHAR(3000)"/>
+            <column name="created_dated" type="DATETIME"/>
+            <column name="last_modified_date" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1639581135159-2" author="abhishek160.kumar (generated)">
         <createTable tableName="user">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_user"/>
@@ -18,8 +30,12 @@
             <column name="last_modified_date" type="DATETIME"/>
         </createTable>
     </changeSet>
-    <changeSet id="1639579363774-2" author="abhishek160.kumar (generated)">
+    <changeSet id="1639581135159-3" author="abhishek160.kumar (generated)">
         <addUniqueConstraint columnNames="email" constraintName="uc_user_email" tableName="user"/>
+    </changeSet>
+    <changeSet id="1639581135159-4" author="abhishek160.kumar (generated)">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="task" constraintName="FK_TASK_ON_USER"
+                                 referencedColumnNames="id" referencedTableName="user"/>
     </changeSet>
 
 </databaseChangeLog>
