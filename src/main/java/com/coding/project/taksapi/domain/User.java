@@ -1,5 +1,6 @@
 package com.coding.project.taksapi.domain;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -18,11 +20,14 @@ import java.util.Set;
 @Entity
 public class User {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Task> tasks;
+
+    private List<Task> tasks;
     private String userName;
     private String password;
     @Column(unique = true)
@@ -32,5 +37,6 @@ public class User {
     private Timestamp createdDated;
     @UpdateTimestamp
     private Timestamp lastModifiedDate;
+
 
 }
