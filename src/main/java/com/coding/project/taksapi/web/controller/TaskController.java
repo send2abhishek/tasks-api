@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/")
 public class TaskController {
@@ -23,12 +25,12 @@ public class TaskController {
     }
 
     @GetMapping("tasks")
-    public ResponseEntity<CustomTaskAndUser> getTasks() {
+    public ResponseEntity<List<CustomTaskAndUser>> getTasks() {
         return new ResponseEntity<>(taskService.findAllTasks(), HttpStatus.OK);
     }
 
     @GetMapping("users")
-    public ResponseEntity<CustomUser> getUsers() {
+    public ResponseEntity<List<CustomUser>> getUsers() {
         return new ResponseEntity<>(userService.findAllUsers(), HttpStatus.OK);
     }
 

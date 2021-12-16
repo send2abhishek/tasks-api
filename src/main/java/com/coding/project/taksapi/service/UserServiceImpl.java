@@ -4,6 +4,8 @@ import com.coding.project.taksapi.repositories.custom.CustomUser;
 import com.coding.project.taksapi.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -14,8 +16,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public CustomUser findAllUsers() {
+    public List<CustomUser> findAllUsers() {
 
-        return  repository.findByPassword("12345");
+        return  repository.findAllProjectedBy();
     }
 }

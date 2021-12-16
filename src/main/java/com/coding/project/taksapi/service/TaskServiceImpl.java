@@ -5,6 +5,7 @@ import com.coding.project.taksapi.repositories.custom.CustomTaskAndUser;
 import com.coding.project.taksapi.repositories.TaskRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,17 +18,8 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public CustomTaskAndUser findAllTasks() {
-      //  System.out.println("demo"+taskRepository.findByTaskTitle("Demo"));
-//        return taskRepository.findAll().stream()
-//                .map(task -> CustomTasks.builder()
-//                        .taskTitle(task.getTaskTitle())
-//                        .id(task.getId())
-//                        .userName(task.getUser().getUserName())
-//                        .userId(task.getUser().getId())
-//                        .build()).collect(Collectors.toList());
-
-        return taskRepository.findByTaskTitle("Demo");
+    public List<CustomTaskAndUser> findAllTasks() {
+        return taskRepository.findAllProjectedBy();
     }
 
     @Override
