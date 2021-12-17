@@ -1,7 +1,6 @@
 package com.coding.project.taksapi.service;
 
 import com.coding.project.taksapi.domain.Task;
-import com.coding.project.taksapi.domain.User;
 import com.coding.project.taksapi.repositories.TaskRepository;
 import com.coding.project.taksapi.repositories.custom.CustomTask;
 import com.coding.project.taksapi.web.exceptionHandler.NotFoundException;
@@ -43,11 +42,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task saveTask(TaskDto task) {
-        return taskRepository.save(Task.builder().
-                user(User.builder()
-                        .id(task.getUserId())
-                        .build()).
-                taskTitle(task.getTaskTitle()).taskDesc(task.getTaskDesc()).build());
+        return taskRepository.save(taskMapper.taskDtoToTask(task));
     }
 
 

@@ -40,10 +40,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     }
 
-//    @ResponseStatus(HttpStatus.NOT_FOUND)
-//    @ExceptionHandler(NoHandlerFoundException.class)
-//    public String handleNoHandlerFoundException(NoHandlerFoundException ex) {
-//
-//        return "Specified path not found on this server";
-//    }
+
+
+
+
 }
