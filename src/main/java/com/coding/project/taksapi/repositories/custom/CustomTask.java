@@ -1,16 +1,16 @@
 package com.coding.project.taksapi.repositories.custom;
 
-public interface CustomTaskAndUser {
+import java.sql.Timestamp;
+
+public interface CustomTask {
     Long getId();
     String getTaskTitle();
-
+    String getTaskDesc();
     User getUser();
-
-
+    Timestamp getLastModifiedDate();
 
     interface User{
         String getEmail();
-        Long getId();
         String getUserName();
     }
 }
