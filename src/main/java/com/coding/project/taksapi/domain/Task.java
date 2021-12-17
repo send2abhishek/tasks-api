@@ -1,9 +1,6 @@
 package com.coding.project.taksapi.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,12 +27,12 @@ public class Task {
     @JsonIgnore
     private User user;
     private String taskTitle;
-
     @Column(length = 3000)
     private String taskDesc;
     @CreationTimestamp
     private Timestamp createdDated;
     @UpdateTimestamp
     private Timestamp lastModifiedDate;
+
 
 }

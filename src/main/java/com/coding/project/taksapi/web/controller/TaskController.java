@@ -5,6 +5,7 @@ import com.coding.project.taksapi.repositories.custom.CustomTask;
 import com.coding.project.taksapi.repositories.custom.CustomUser;
 import com.coding.project.taksapi.service.TaskService;
 import com.coding.project.taksapi.service.UserService;
+import com.coding.project.taksapi.web.model.TaskDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +41,8 @@ public class TaskController {
     }
 
     @PostMapping("tasks")
-    public ResponseEntity<Task> saveTasks(@RequestBody Task task) {
+    public ResponseEntity<Task> saveTasks(@RequestBody TaskDto task) {
+
         return new ResponseEntity<>(taskService.saveTask(task), HttpStatus.CREATED);
     }
 }
