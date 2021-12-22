@@ -27,7 +27,8 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<CustomTask> findAllTasksByUserId(Long userId) {
-        return taskRepository.readByUser_Id(userId);
+        List<CustomTask> customTasks = taskRepository.readByUser_Id(userId);
+        return customTasks;
     }
 
     @Override
