@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -38,8 +39,8 @@ public class TaskController {
     }
 
     @GetMapping("tasks/{taskId}/{userId}")
-    public ResponseEntity<CustomTask> getTasksByTaskIdAndUserId(@PathVariable Long taskId,@PathVariable Long userId) {
-        return new ResponseEntity<>(taskService.findTaskByTaskIdAndUserId(taskId,userId), HttpStatus.OK);
+    public ResponseEntity<CustomTask> getTasksByTaskIdAndUserId(@PathVariable Long taskId, @PathVariable Long userId) {
+        return new ResponseEntity<>(taskService.findTaskByTaskIdAndUserId(taskId, userId), HttpStatus.OK);
     }
 
     @GetMapping("users")
@@ -52,4 +53,20 @@ public class TaskController {
 
         return new ResponseEntity<>(taskService.saveTask(task), HttpStatus.CREATED);
     }
+
+    @PutMapping("tasks/{taskId}")
+    public ResponseEntity<TaskDto> updateTask(@Valid @RequestBody TaskDto task, @PathVariable Long taskId) {
+        return new ResponseEntity<>(taskService.updateTask(task, taskId), HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("tasks/{taskId}")
+    public ResponseEntity<Object> deleteTask(@PathVariable Long taskId) {
+        taskService.deleteTask(taskId);
+        HashMap<String, Object> response = new HashMap<>();
+        response.put("status", "item deleted");
+
+        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
+    }
+
+
 }

@@ -9,6 +9,7 @@ import com.coding.project.taksapi.web.mapper.TaskMapper;
 import com.coding.project.taksapi.web.model.TaskDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,7 +40,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public CustomTask findTaskByTaskIdAndUserId(Long taskId, Long userId) {
-        return taskRepository.findByIdAndUser_Tasks_Id(taskId, userId).orElseThrow(NotFoundException::new);
+        return taskRepository.findByIdAndUser_Tasks_Id(taskId, userId).orElseThrow(() -> new NotFoundException("task not found with given task id"));
     }
 
     @Override
@@ -50,6 +51,25 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public Task saveTask(TaskDto task) {
         return taskRepository.save(taskMapper.taskDtoToTask(task));
+    }
+
+    @Transactional
+    @Override
+    public TaskDto updateTask(TaskDto task, Long taskId) {
+
+        Task foundTask = taskRepository.findById(taskId).orElseThrow(() -> new NotFoundException("task not found with given task id"));
+        if (foundTask != null) {
+            foundTask.setTaskTitle(task.getTaskTitle());
+            foundTask.setTaskDesc(task.getTaskDesc());
+            taskRepository.save(foundTask);
+        }
+
+        return task;
+    }
+
+    @Override
+    public void deleteTask(Long taskId) {
+        taskRepository.deleteById(taskId);
     }
 
 
