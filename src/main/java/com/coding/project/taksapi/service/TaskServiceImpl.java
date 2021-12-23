@@ -3,6 +3,7 @@ package com.coding.project.taksapi.service;
 import com.coding.project.taksapi.domain.Task;
 import com.coding.project.taksapi.repositories.TaskRepository;
 import com.coding.project.taksapi.repositories.custom.CustomTask;
+import com.coding.project.taksapi.repositories.custom.TasksUser;
 import com.coding.project.taksapi.web.exceptionHandler.NotFoundException;
 import com.coding.project.taksapi.web.mapper.TaskMapper;
 import com.coding.project.taksapi.web.model.TaskDto;
@@ -23,6 +24,11 @@ public class TaskServiceImpl implements TaskService {
         this.taskRepository = taskRepository;
 
         this.taskMapper = taskMapper;
+    }
+
+    @Override
+    public List<TasksUser> findALlTasks() {
+        return taskRepository.findAllProjectedBy();
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.coding.project.taksapi.web.controller;
 import com.coding.project.taksapi.domain.Task;
 import com.coding.project.taksapi.repositories.custom.CustomTask;
 import com.coding.project.taksapi.repositories.custom.CustomUser;
+import com.coding.project.taksapi.repositories.custom.TasksUser;
 import com.coding.project.taksapi.service.TaskService;
 import com.coding.project.taksapi.service.UserService;
 import com.coding.project.taksapi.web.model.TaskDto;
@@ -26,6 +27,11 @@ public class TaskController {
         this.userService = userService;
     }
 
+    @GetMapping("tasks")
+    public ResponseEntity<List<TasksUser>> getAllTasks() {
+        return new ResponseEntity<>(taskService.findALlTasks(), HttpStatus.OK);
+    }
+
     @GetMapping("tasks/{userId}")
     public ResponseEntity<List<CustomTask>> getTasks(@PathVariable Long userId) {
         return new ResponseEntity<>(taskService.findAllTasksByUserId(userId), HttpStatus.OK);
@@ -46,17 +52,4 @@ public class TaskController {
 
         return new ResponseEntity<>(taskService.saveTask(task), HttpStatus.CREATED);
     }
-
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    @ExceptionHandler(MethodArgumentNotValidException.class)
-//    public Map<String, String> handleValidationExceptions(
-//            MethodArgumentNotValidException ex) {
-//        Map<String, String> errors = new HashMap<>();
-//        ex.getBindingResult().getAllErrors().forEach((error) -> {
-//            String fieldName = ((FieldError) error).getField();
-//            String errorMessage = error.getDefaultMessage();
-//            errors.put(fieldName, errorMessage);
-//        });
-//        return errors;
-//    }
 }
